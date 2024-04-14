@@ -29,23 +29,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/m1cypher/bastion_host">
+  <a href="https://github.com/m1cypher/hermodr-ghost">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Bastion Host Script</h3>
+<h3 align="center">Hermodr Ghost Application</h3>
 
   <p align="center">
     project_description
     <br />
-    <a href="https://github.com/m1cypher/bastion_host"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/m1cypher/hermodr-ghost"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/m1cypher/bastion_host">View Demo</a>
+    <a href="https://github.com/m1cypher/hermodr-ghost">View Demo</a>
     ·
-    <a href="https://github.com/m1cypher/bastion_host/issues">Report Bug</a>
+    <a href="https://github.com/m1cypher/hermodr-ghost/issues">Report Bug</a>
     ·
-    <a href="https://github.com/m1cypher/bastion_host/issues">Request Feature</a>
+    <a href="https://github.com/m1cypher/hermodr-ghost/issues">Request Feature</a>
   </p>
 </div>
 
@@ -82,9 +82,18 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://boydsbar.xyz/oppenheimer)
 
-As I have build, rebuilt, and expanded my homelab, I always wanted a better way to monitor SSH traffic and restrict it. So I built these bastion host SSH script. You have 3 different scripts, the first will create a new user of your choice on your bastion host, install Google PAM for MFA, and then lockdown SSH to that user. The second script is the SSH lockdown for the remote host. The last one will be added to the ~/.bashrc at the end to restrict the terminal access
+I currently write reviews for movies, TV shows, and book for my own fun. However, I have been publishing them to a blog for the past year. However, this has become faily tedious and I want to be able to automate as much as I can. Currently I use [Obsidian](https://obsidian.md) to write the reviews and then they are manually published on a [Ghost blog](https://ghost.org) that I selfhost on a VPS. After writing the review, I copy and paste it to the blog and then setup a publish date and email. This works without issue, but I hate the back and forth.
+
+This project should accomplish the following with some thoughts below each step:
+
+1) Scan repository of my backed up obsidian notes. (This might be better suited for something like gitlab or gitea, but for now will be a script to practice python skills and transferability for other users.)
+2) If the repository has new notes that meet certain requirements (Either is labeled as completed or no additional edits in 72 hours), stag to publish to ghost.
+3) Publish notes to Ghost blog using API.
+4) Scehdule weekly email to go out with excerpt and score for the review (Right now, each review has its own email. This really isn't the best as I personally hate getting blaseted by emails from people and would prefer a weekly roll up to see if anything is worth reading. So this weekly email will have an excert from each review and then the score).
+
+I will be building this with OOP in mind.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -92,7 +101,7 @@ As I have build, rebuilt, and expanded my homelab, I always wanted a better way 
 
 ### Built With
 
-* Bash
+* Python
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -108,15 +117,16 @@ Download the git project.
 This is an example of how to list things you need to use the software and how to install them.
 * bash
   ```sh
-  git clone https://github.com/m1cypher/bastion_host.git
+  git clone https://github.com/m1cypher/hermodr-ghost.git
   ```
 
 ### Installation
 
 1. Modify permissions for the scripts
+
 ```sh
-chmod +x new_user.sh
-chmod +x ssh_lockdown_remote.sh
+cd /hermodr-ghost
+chmod +x *.sh
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -126,9 +136,9 @@ chmod +x ssh_lockdown_remote.sh
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+After working prototype is completed, you can check out the wiki page for documentation.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://github.com/m1cypher/hermodr-ghost/wiki)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -137,10 +147,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add Auditing
-- [ ] Export of Auditing Logs
+- [ ] Create repository scanning script
+- [ ] Create Blog staging script
+- [ ] Create Blog publicion script
+- [ ] Create Email Publication script
 
-See the [open issues](https://github.com/m1cypher/bastion_host/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/m1cypher/hermodr-ghost/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -178,7 +190,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Your Name - [@mimircyber](https://twitter.com/mimircyber) - info@mimircyber.com
 
-Project Link: [https://github.com/m1cypher/bastion_host](https://github.com/m1cypher/bastion_host)
+Project Link: [https://github.com/m1cypher/hermodr-ghost](https://github.com/m1cypher/hermodr-ghost)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -196,16 +208,16 @@ Project Link: [https://github.com/m1cypher/bastion_host](https://github.com/m1cy
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/m1cypher/bastion_host.svg?style=for-the-badge
-[contributors-url]: https://github.com/m1cypher/bastion_host/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/m1cypher/bastion_host.svg?style=for-the-badge
-[forks-url]: https://github.com/m1cypher/bastion_host/network/members
-[stars-shield]: https://img.shields.io/github/stars/m1cypher/bastion_host.svg?style=for-the-badge
-[stars-url]: https://github.com/m1cypher/bastion_host/stargazers
-[issues-shield]: https://img.shields.io/github/issues/m1cypher/bastion_host.svg?style=for-the-badge
-[issues-url]: https://github.com/m1cypher/bastion_host/issues
-[license-shield]: https://img.shields.io/github/license/m1cypher/bastion_host.svg?style=for-the-badge
-[license-url]: https://github.com/m1cypher/bastion_host/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/m1cypher/hermodr-ghost.svg?style=for-the-badge
+[contributors-url]: https://github.com/m1cypher/hermodr-ghost/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/m1cypher/hermodr-ghost.svg?style=for-the-badge
+[forks-url]: https://github.com/m1cypher/hermodr-ghost/network/members
+[stars-shield]: https://img.shields.io/github/stars/m1cypher/hermodr-ghost.svg?style=for-the-badge
+[stars-url]: https://github.com/m1cypher/hermodr-ghost/stargazers
+[issues-shield]: https://img.shields.io/github/issues/m1cypher/hermodr-ghost.svg?style=for-the-badge
+[issues-url]: https://github.com/m1cypher/hermodr-ghost/issues
+[license-shield]: https://img.shields.io/github/license/m1cypher/hermodr-ghost.svg?style=for-the-badge
+[license-url]: https://github.com/m1cypher/hermodr-ghost/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/garrett-e-boyd
 [product-screenshot]: images/screenshot.png
