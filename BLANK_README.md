@@ -7,8 +7,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -23,8 +21,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -48,8 +44,6 @@
     <a href="https://github.com/m1cypher/hermodr-ghost/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -77,8 +71,6 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -97,15 +89,11 @@ I will be building this with OOP in mind.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
 * Python
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -115,7 +103,9 @@ Download the git project.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
+
 * bash
+
   ```sh
   git clone https://github.com/m1cypher/hermodr-ghost.git
   ```
@@ -131,8 +121,6 @@ chmod +x *.sh
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -142,21 +130,17 @@ _For more examples, please refer to the [Documentation](https://github.com/m1cyp
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Create repository scanning script
-- [ ] Create Blog staging script
-- [ ] Create Blog publicion script
-- [ ] Create Email Publication script
+* [ ] Create repository scanning script
+* [ ] Create Blog staging script
+* [ ] Create Blog publicion script
+* [ ] Create Email Publication script
 
 See the [open issues](https://github.com/m1cypher/hermodr-ghost/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -174,8 +158,6 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
 ## License
 
@@ -183,18 +165,14 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@mimircyber](https://twitter.com/mimircyber) - info@mimircyber.com
+Your Name - [@mimircyber](https://twitter.com/mimircyber) - <info@mimircyber.com>
 
 Project Link: [https://github.com/m1cypher/hermodr-ghost](https://github.com/m1cypher/hermodr-ghost)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
@@ -204,7 +182,6 @@ Project Link: [https://github.com/m1cypher/hermodr-ghost](https://github.com/m1c
 * []()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
