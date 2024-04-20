@@ -41,7 +41,7 @@ for review_file in tv_reviews_dictionary:
     file_content = content_repo.get_contents(f"{TV_PATH}/{review_file}.md")
     content = file_content.content
     cleantext = base64.b64decode(content)
-    cleantext.replace("\\n", "\n")
+    cleantext.replace('\\n', "\n")
     # cleantext = BeautifulSoup(cleantext, "lxml").text
 
     # for line in cleantext:
