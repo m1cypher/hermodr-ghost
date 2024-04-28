@@ -7,6 +7,7 @@ from datetime import datetime
 from github import Github, Auth
 import base64
 from bs4 import BeautifulSoup
+import json
 
 load_dotenv()
 
@@ -23,11 +24,10 @@ def fetch_content(repo_name, folder_path):
     return [content_file.path for content_file in contents]
 
 def extract_review_details(review, file_path):
-    print(review)
-    name = review.replace("ContentFile(path=", '').replace(f'"{file_path}/', '').replace('.md")', '')
+    name = review.replace(f'"{file_path}/', '').replace('.md")', '')
     name = name.split("/")[-1].replace('.md', '')
-    path = review.replace("ContentFile(path=", '').replace('.md")', '')
-    path = path.split("/")[-1].replace('.md', '')
+    path = review.replace('.md")', '')
+    # path = path.split("/")[-1].replace('.md', '')
     return name, path
 
 def update_tv_review_status(review_dc, repo_name, file_path):
@@ -127,7 +127,6 @@ def main():
 
     # TV Information Gathering
     tv_review_old = fetch_content('obsidian-notes', TV_PATH)
-    print(tv_review_old)
     for review in tv_review_old:
         name, path = extract_review_details(review, TV_PATH)
         if name not in review_dc["TV"]:
@@ -174,6 +173,9 @@ def main():
     # review_dc["Books"] = update_book_isbn_info(review_dc["Books"], 'obsidian-notes', BOOK_PATH)
 
     pprint(review_dc)
+    file_name = "data.json"
+    with open(file_name, 'w') as json_file:
+        json.dump(review_dc, json_file)
 
 if __name__ == "__main__":
     main()
