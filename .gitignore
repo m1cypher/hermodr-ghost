@@ -1,2 +1,3 @@
 # Ignore ALL .env files
 *.env
+./data/*
