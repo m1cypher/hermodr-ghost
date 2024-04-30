@@ -173,9 +173,3 @@ def main():
     # review_dc["Books"] = update_book_isbn_info(review_dc["Books"], 'obsidian-notes', BOOK_PATH)
 
     pprint(review_dc)
-    file_name = "data.json"
-    with open(file_name, 'w') as json_file:
-        json.dump(review_dc, json_file)
-
-if __name__ == "__main__":
-    main()
