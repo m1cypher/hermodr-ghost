@@ -1,4 +1,4 @@
-# https://github.com/pysonDB/pysonDB?tab=readme-ov-file
+# https://github.com/pysonDB/pysonDB
 from pysondb import db
 import os
 

@@ -1,3 +1,5 @@
+# https://python-pillow.org/
+
 from PIL import Image
 import random
 
