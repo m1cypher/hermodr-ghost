@@ -1,5 +1,7 @@
 # https://xbopp.com/ghost-api-python-3-x-1/
 # Note that the admin urls have changed to REMOVE v3 from the line. e.g. ghost/api/v3/admin/members = ghost/api/admin/members
+# https://ghost.org/docs/admin-api/#
+
 
 import requests
 import os
@@ -20,7 +22,55 @@ CONTENT_KEY = os.getenv("GHOST_CONTENT_KEY")
 
 
 class GhostAdmin():
+    """
+    A class to interact with the Ghost API for administrative tasks.
+
+    Example:
+    
+    ga = GhostAdmin('boydsbar')
+    settings = ga.getSettings()
+    members = ga.getMembers()
+    post = ga.getPostBySlug('your-post-slug')
+    post = ga.getPostById('your-post-id')
+    allPosts = ga.getAllPosts()
+    posts = ga.getPostByTitle('Your Post Title')
+    result = ga.createPost('Your Post Title', 'Your Post Content', status='published')
+    image = ga.loadImage('path/to/your/image.jpg')
+    result = ga.imageUpload('YourImage.jpg', image)
+    result = ga.updatePostByTitle('Old Post Title', 'New Post Title', 'New Post Content')
+    result = ga.deletePostById('your-post-id')
+
+    make sure you print or the returns, which include error messages, will not show.
+
+    Example:
+    # create post ---------------------------------------
+    title = 'new post x'
+    body = '''<div>Lorem ipsum dolor sit amet, ...</div>'''
+    excerpt = 'this post is about ...'
+    tags = [{'name':'my new tag x', 'description': 'a new tag'}]
+    authors = [{'name':'Jacques Bopp', 'slug': 'jacques'}]
+    featureImage = 'content/images/2020/09/featureImage1.jpg'
+    slug = 'my-new-postx'
+    result = ga.createPost(title, body, bodyFormat='html', excerpt=excerpt, tags=tags, authors=authors, status='draft', featured=False, featureImage=featureImage)
+    # update post ---------------------------------------
+    oldTitle = 'new post x'
+    newTitle = 'updated post x'
+    body = '''<div>Lorem ipsum  ...</div>'''
+    excerpt = 'this post is about an update ...'
+    tags = [{'name':'my new tag', 'description': 'a new tag'},{'name':'my second new tag', 'description': 'a second new tag'}]
+    authors = [{'name':'Jacques Bopp', 'slug': 'jacques'},{'name':'Ghost', 'slug': 'ghost'}]
+    featureImage = 'content/images/2020/09/featureImage2.jpg'
+    result = ga.updatePostByTitle(oldTitle, newTitle, body, bodyFormat='html', excerpt=excerpt, tags=tags, authors=authors, status='draft', featured=False, featureImage=featureImage)
+    """
+
+
     def __init__(self, siteName):
+        """
+        Initializes the GhostAdmin class.
+
+        Args:
+            siteName (str): The name of the site.
+        """
         self.siteName = siteName
         self.site = None
         self.setSiteData()
@@ -29,6 +79,9 @@ class GhostAdmin():
         self.createHeaders()
 
     def setSiteData(self):
+        """
+        Sets site data.
+        """
         self.site = {
             'name': 'boydsbar',
             'url': GHOST_BLOG_URL,
@@ -40,6 +93,12 @@ class GhostAdmin():
 
 
     def createToken(self):
+        """
+        Creates a token for authentication.
+        
+        Returns:
+            str: The authentication token.
+        """
         key = self.site['AdminApiKey']
         id, secret = key.split(':')
         iat = int(date.now().timestamp())
@@ -55,6 +114,12 @@ class GhostAdmin():
         return self.token
 
     def createHeaders(self):
+        """
+        Creates headers for the API request.
+        
+        Returns:
+            dict: The headers for the API request.
+        """
         self.createToken()
         self.headers = {
             'Authorization': f'Ghost {self.token}'
@@ -62,6 +127,12 @@ class GhostAdmin():
         return self.headers
 
     def getSettings(self):
+        """
+        Retrieves settings from the Ghost API.
+        
+        Returns:
+            dict: The settings from the Ghost API.
+        """
         settings = {}
         url = self.site['url']+"/ghost/api/content/settings/?key="+self.site['ContentApiKey']
         result = requests.get(url, headers=self.headers)
@@ -72,6 +143,12 @@ class GhostAdmin():
         return settings
     
     def getMembers(self):
+        """
+        Retrieves members from the Ghost API.
+        
+        Returns:
+            dict: The members from the Ghost API.
+        """
         members = {}
         url = self.site['url']+'/ghost/api/admin/members'
         result = requests.get(url, headers=self.headers)
@@ -83,6 +160,15 @@ class GhostAdmin():
         return members
     
     def getPostBySlug(self,slug):
+        """
+        Retrieves a post by its slug from the Ghost API.
+        
+        Args:
+            slug (str): The slug of the post.
+        
+        Returns:
+            dict: The post retrieved by its slug.
+        """
         url = self.site['url']+'/ghost/api/admin/slug/'+slug+'/'
         params = {'formats': 'html,mobiledoc'}
         result = requests.get(url, params=params, headers=self.headers)
@@ -93,6 +179,15 @@ class GhostAdmin():
         return post
     
     def getPostById(self, id):
+        """
+        Retrieves a post by its ID from the Ghost API.
+        
+        Args:
+            id (str): The ID of the post.
+        
+        Returns:
+            dict: The post retrieved by its ID.
+        """
         url = self.site['url']+'/ghost/api/admin/slug/'+id+'/'
         params = {'formats': 'html,mobiledoc'}
         result = requests.get(url, params=params, headers=self.headers)
@@ -103,6 +198,12 @@ class GhostAdmin():
         return post
     
     def getAllPosts(self):
+        """
+        Retrieves all posts from the Ghost API.
+        
+        Returns:
+            dict: All posts retrieved from the Ghost API.
+        """
         url = self.site['url']+'/ghost/api/admin/posts/'
         params = {
             'formats': 'html,mobiledoc',
@@ -115,6 +216,15 @@ class GhostAdmin():
         return posts
     
     def getPostByTitle(self, title):
+        """
+        Retrieves a post by its title from the Ghost API.
+        
+        Args:
+            title (str): The title of the post.
+        
+        Returns:
+            dict: The post retrieved by its title.
+        """
         allPosts = self.getAllPosts()
         posts = []
         for post in allPosts:
@@ -180,6 +290,15 @@ class GhostAdmin():
         return result
     
     def loadImage(self, imagePathandName):
+        """
+        Loads an image.
+        
+        Args:
+            imagePathandName (str): The path and name of the image file.
+        
+        Returns:
+            BytesIO: The image object.
+        """
         image = open(imagePathandName, 'rb')
         imageObject = image.read()
         image.close()
@@ -188,6 +307,16 @@ class GhostAdmin():
         return image
     
     def imageUpload(self, imageName, imageObject):
+        """
+        Uploads an image to the Ghost API.
+        
+        Args:
+            imageName (str): The name of the image.
+            imageObject (BytesIO): The image object to be uploaded.
+        
+        Returns:
+            str: A message indicating whether the image upload was successful as well as the url for the image to be used as featured image or in the post.
+        """
         url = self.site['url'] + '/ghost/api/admin/images/upload'
         files = {"file": (imageName, imageObject, 'image/jpeg')}
         params = {'purpose': 'image', 'ref': imageName} # 'image', 'profile_image', 'icon'
@@ -200,6 +329,24 @@ class GhostAdmin():
             result = f'error: upload failed (status code: {result.status_code})'
 
     def updatePostByTitle(self, oldTitle, newTitle, body, bodyFormat='markdown', excerpt=None, tags=None, authors=None, status='draft', featured=False, featuredImage=None):
+        """
+        Updates a post by its title.
+        
+        Args:
+            oldTitle (str): The old title of the post.
+            newTitle (str): The new title of the post.
+            body (str): The content of the post.
+            bodyFormat (str): The format of the post content. Default is 'markdown'.
+            excerpt (str): The excerpt for the post.
+            tags (list): A list of dictionaries.
+            authors (list): A list of dictionaries.
+            status (str): The status of the post. Default is 'draft'.
+            featured (bool): Whether the post should be featured.
+            featureImage (str): The URL of the featured image.
+        
+        Returns:
+            str: A message indicating whether the post update was successful.
+        """
         posts= self.getPostByTitle(oldTitle)
         if len(posts) > 1:
             result = 'error: more than 1 post found'
@@ -222,7 +369,7 @@ class GhostAdmin():
             if featuredImage != None: 
                 content['feature_image'] = self.site['url'] + featuredImage
             content['updated_at'] = post['updated_at']
-            url = self.site['url'] + 'ghost/api/admin/posts/' + post['id'] + '/'
+            url = self.site['url'] + '/ghost/api/admin/posts/' + post['id'] + '/'
             result = requests.put(url, json={"posts": [content]}, headers=self.headers)
             if result.ok: 
                 result = 'success: post updated (status_code:' + str(result.status_code) + ')'
@@ -230,43 +377,23 @@ class GhostAdmin():
                 result = 'error: post not updated (status_code:' + str(result.status_code) + ')'
 
         return result
-
-
-if __name__ == '__main__':
-    ga = GhostAdmin('boydsbar')
-    posts = ga.getAllPosts()
-    members = ga.getMembers()
-    settings = ga.getSettings()
-
-
-    # title = 'new post'
-    # body = """<div>Lorem ipsum dolor sit amet</div>"""
-    # excerpt = 'this post is about ...'
-    # tags = [{'name':'my new tag', 'description': 'a new tag'}]
-    # authors = [{'name':'Jacques Bopp', 'slug': 'jacques'}]
-    # slug = 'my-new-post'
     
-    # result = ga.createPost(title, body, bodyFormat='html', excerpt = excerpt, tags=tags, authors=authors, status='draft', featured=False, featuredImage=None, slug=slug)
-    # print(result)
+    def deletePostById(self, id):
+        """
+        Deletes a post by its ID.
+        
+        Args:
+            id (str): The ID of the post to be deleted.
+        
+        Returns:
+            str: A message indicating whether the post deletion was successful.
+        """
+        url = self.site['url'] + '/ghost/api/admin/posts/' + id + '/'
+        result = requests.delete(url, headers=self.headers)
+        if result.ok:
+            result = f'success: post deleted (status_code: {result.status_code})'
+        else:
+            result = f'error: post NOT deleted (status_code: {result.status_code})'
 
-    image = ga.loadImage('C:\\Users\\emerg\\OneDrive\\Pictures\\John Wick 2.jpg')
-    result = ga.imageUpload('EyeOfOdin.jpg', image)
+        return result
 
-
-# print(ga.getSettings())
-# print(ga.getMembers())
-
-# from PIL import Image
-
-# def check_image_format(image_path):
-#     try:
-#         with Image.open(image_path) as img:
-#             return img.format.lower()
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         return None
-
-# # Example usage
-# image_path = 'C:\\Users\\emerg\\OneDrive\\Pictures\\eye-of-odin.jpg'
-# image_format = check_image_format(image_path)
-# print("Image format:", image_format)
