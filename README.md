@@ -104,7 +104,11 @@ Download the git project.
 
 This is an example of how to list things you need to use the software and how to install them.
 
-* bash
+This project assumes a couple things.
+
+1) You use obsidian to save your blogs.
+2) You use Obsidian Git to save your vault to Github.
+3) You are using Ghost to host your blogs.
 
   ```sh
   git clone https://github.com/m1cypher/hermodr-ghost.git
@@ -134,7 +138,7 @@ _For more examples, please refer to the [Documentation](https://github.com/m1cyp
 ## Roadmap
 
 * [ ] Create repository scanning script
-* [ ] Create Blog staging script
+* [ ] Create DB to store the published blogs.
 * [ ] Create Blog publicion script
 * [ ] Create Email Publication script
 
