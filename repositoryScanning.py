@@ -1,7 +1,5 @@
 # https://docs.github.com/en/rest?apiVersion=2022-11-28
 
-from dotenv import load_dotenv
-from pprint import pprint
 from datetime import datetime
 from github import Github, Auth
 import base64
