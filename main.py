@@ -5,27 +5,40 @@ from pprint import pprint
 
 from ghostAdmin import GhostAdmin
 from repositoryScanning import GithubReviewAdmin
+from dataAccessor import dataAccessor
+from imageProcessing import ImageOverlay
 
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    filename='hermodr.log'
-)
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format='%(asctime)s - %(levelname)s - %(message)s',
+#     datefmt='%Y-%m-%d %H:%M:%S',
+#     filename= os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/hermodr.log')
+# )
+
+
+# def get_content():
+#     GithubReviewAdmin.fetch_content
 
 def main():
     load_dotenv()
     GITHUB_API_KEY = os.getenv("GITHUB_API_KEY")
 
-    updater = GithubReviewAdmin(GITHUB_API_KEY)
+    da = dataAccessor()
+    da.initialize_db()
 
-    tv_accessor = updater.process_reviews("TV Shows", "TV")
-    movie_accessor = updater.process_reviews("Movies", "Movie")
-    book_accessor = updater.process_reviews("Books", "Book")
+    gra = GithubReviewAdmin(GITHUB_API_KEY)
 
-    review_dc = {"TV": tv_accessor, "Movies": movie_accessor, "Books": book_accessor}
-    pprint(review_dc)
+
+    
+    # ga = GhostAdmin()
+    # img = ImageOverlay()
+
+    gra.process_reviews("TV Shows", "tv")
+    # movie_accessor = gra.process_reviews("Movies", "movie")
+    # book_accessor = gra.process_reviews("Books", "book")
 
 if __name__ == "__main__":
     main()
+
+
