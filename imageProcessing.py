@@ -4,7 +4,22 @@ from PIL import Image
 import random
 
 class ImageOverlay:
+    '''
+    A class to overlay multiple images onto a base image using the Pillow (PIL) library for image manipulation.
+    
+    Attributes:
+        base_img (PIL.Image.Image): The base image onto which the overlay images will be placed.
+        overlay_img_paths (list): A list of file paths to the overlay images.
+    '''
+
     def __init__(self, base_image_path, overlay_image_paths):
+        '''
+        Initializes the ImageOverlay object.
+        
+        Args:
+            base_image_path (str): The file path to the base image.
+            overlay_image_paths (list): A list of file paths to the overlay images.
+        '''
         self.base_img = self.open_image(base_image_path)
         if self.base_img:
             self.overlay_img_paths = [path for path in overlay_image_paths if self.open_image(path)]
@@ -16,6 +31,15 @@ class ImageOverlay:
             print("Invalid base image path.")
 
     def open_image(self, image_path):
+        '''
+        Opens an image file using Pillow (PIL) library.
+
+        Args:
+            image_path (str): The file path to the image.
+
+        Returns:
+            PIL.Image.Image: The opened image.
+        '''
         try:
             with Image.open(image_path) as img:
                 return img.copy()
@@ -24,6 +48,9 @@ class ImageOverlay:
             return None
 
     def overlay_images(self):
+        '''
+        Overlays the images onto the base image.
+        '''
         # Resize base image
         width, height = self.base_img.size
         new_width = int(width * 1.4)
@@ -48,6 +75,17 @@ class ImageOverlay:
                 self.base_img.paste(overlay_img, (x, y), overlay_img)
 
     def resize_with_aspect_ratio(self, img, new_width, new_height):
+        '''
+        Resizes an image while maintaining its aspect ratio.
+
+        Args:
+            img (PIL.Image.Image): The image to be resized.
+            new_width (int): The desired width of the resized image.
+            new_height (int): The desired height of the resized image.
+
+        Returns:
+            PIL.Image.Image: The resized image.
+        '''
         width, height = img.size
         aspect_ratio = width / height
 
@@ -59,10 +97,25 @@ class ImageOverlay:
         return img.resize((new_width, new_height))
 
     def save(self, output_path):
+        '''
+        Saves the resulting image to a file.
+
+        Args:
+            output_path (str): The file path to save the resulting image.
+        '''
         self.base_img.save(output_path)
 
     @staticmethod
     def check_image_format(image_path):
+        '''
+        Checks the format of an image file.
+
+        Args:
+            image_path (str): The file path to the image.
+
+        Returns:
+            str: The format of the image (e.g., 'jpeg', 'png').
+        '''
         try:
             with Image.open(image_path) as img:
                 return img.format.lower()
@@ -71,16 +124,16 @@ class ImageOverlay:
             return None
 
 # Example usage
-base_image_path = "C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\_Boyds Bar\\Articles\\_XYZ Articles\\Movie Reviews\\12 Strong.jpg"
-overlay_image_paths = ["C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\_Boyds Bar\\Articles\\_XYZ Articles\\Stamps\\Dad Approved Stamp.png", 
-                       "C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\_Boyds Bar\\Articles\\_XYZ Articles\\Stamps\\Mom Approved Stamp.png"]
-output_image_path = "C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\Coding\\Personal Projects\\output_image.jpg"
+# base_image_path = "C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\_Boyds Bar\\Articles\\_XYZ Articles\\Movie Reviews\\12 Strong.jpg"
+# overlay_image_paths = ["C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\_Boyds Bar\\Articles\\_XYZ Articles\\Stamps\\Dad Approved Stamp.png", 
+#                        "C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\_Boyds Bar\\Articles\\_XYZ Articles\\Stamps\\Mom Approved Stamp.png"]
+# output_image_path = "C:\\Users\\emerg\\OneDrive\\Documents\\_Mimir Cyber\\Coding\\Personal Projects\\output_image.jpg"
 
-image_overlay = ImageOverlay(base_image_path, overlay_image_paths)
-if image_overlay.base_img:
-    image_overlay.save(output_image_path)
-else:
-    print("Error: Image overlay could not be created.")
+# image_overlay = ImageOverlay(base_image_path, overlay_image_paths)
+# if image_overlay.base_img:
+#     image_overlay.save(output_image_path)
+# else:
+#     print("Error: Image overlay could not be created.")
 
-# Check image format
-print(ImageOverlay.check_image_format(output_image_path))
+# # Check image format
+# print(ImageOverlay.check_image_format(output_image_path))
