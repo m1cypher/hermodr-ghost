@@ -44,7 +44,6 @@ class dataAccessor():
         if not self.tv_show_table.search(query.name == name):
             tv_show = {
                 "name": name,
-                "type": "TV",
                 "path": path,
                 "status": status,
                 "imdbId": imdb_id,
@@ -78,7 +77,6 @@ class dataAccessor():
         if not self.movie_table.search(query.name == name):
             movie = {
                 "name": name,
-                "type": "Movie",
                 "path": path,
                 "status": status,
                 "imdbId": imdb_id,
@@ -112,7 +110,6 @@ class dataAccessor():
         if not self.book_table.search(query.name == name):
             book = {
                 "name": name,
-                "type": "Book",
                 "path": path,
                 "status": status,
                 "isbn": isbn,
@@ -197,19 +194,16 @@ class dataAccessor():
             data_accessor = DataAccessor()
             tv_show_id = data_accessor.search_item("tv_show", "Breaking Bad")
         """
-        if key == "tv_show":
+        table = None
+        if "tv" in key.lower():
             table = self.tv_show_table
-        elif key == "movie":
+        elif "movie" in key.lower():
             table = self.movie_table
-        elif key == "book":
+        elif "book" in key.lower():
             table = self.book_table
         else:
             return None
 
         query = Query()
-        result = table.search(query.name.search(value, flags=re.IGNORECASE))
-        if result:
-            return result[0]
-        else:
-            return None
-    
+        result = table.search(query.name == value, flags=re.IGNORECASE)
+        return result
