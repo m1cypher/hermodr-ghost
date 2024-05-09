@@ -141,6 +141,7 @@ _For more examples, please refer to the [Documentation](https://github.com/m1cyp
 * [ ] Create DB to store the published blogs.
 * [ ] Create Blog publicion script
 * [ ] Create Email Publication script
+* [ ] Create Good Reads review script (Version 1.1 or 2.0  or whatever)
 
 See the [open issues](https://github.com/m1cypher/hermodr-ghost/issues) for a full list of proposed features (and known issues).
 
