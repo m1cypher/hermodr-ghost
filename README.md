@@ -182,7 +182,9 @@ Project Link: [https://github.com/m1cypher/hermodr-ghost](https://github.com/m1c
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
+Thank you to my friend Fleet for helping by coach and project manager.
+
+* [Flyoungiv](https://github.com/flyoungiv)
 * []()
 * []()
 
